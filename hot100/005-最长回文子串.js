@@ -1,20 +1,18 @@
 /**
- * LeetCode Hot100 第5题 - 最长回文子串
- * https://leetcode.cn/problems/longest-palindromic-substring/
- * 
- * 解题思路：
- * 1. 中心扩展法：从每个位置向外扩展，找到以该位置为中心的最长回文串
- * 2. 考虑奇数长度和偶数长度两种情况
- * 
- * 时间复杂度：O(n²)
- * 空间复杂度：O(1)
+ * 最长回文子串
+ * LeetCode Hot100 #5
+ * longest-palindromic-substring
  */
 
-/**
- * @param {string} s
- * @return {string}
- */
-function longestPalindrome(s) {
+// 题目描述
+// 给你一个字符串 s，请你找出 s 中最长的回文子串。
+
+// 解题思路
+// 中心扩展法：从每个位置向外扩展，考虑奇数长度和偶数长度两种情况。
+// 以每个位置为中心向两边扩散，找到以该位置为中心的最长回文串。
+
+// 代码实现
+function solution(s) {
   if (s.length < 2) return s;
   
   let start = 0;
@@ -34,19 +32,13 @@ function longestPalindrome(s) {
   }
   
   for (let i = 0; i < s.length; i++) {
-    // 奇数长度，以i为中心
+    // 奇数长度，以 i 为中心
     expandAroundCenter(i - 1, i + 1);
-    // 偶数长度，以i和i+1为中心
+    // 偶数长度，以 i 和 i+1 为中心
     expandAroundCenter(i, i + 1);
   }
   
   return s.substring(start, start + maxLen);
 }
 
-// 测试用例
-console.log(longestPalindrome("babad")); // "bab" 或 "aba"
-console.log(longestPalindrome("cbbd"));  // "bb"
-console.log(longestPalindrome("a"));      // "a"
-console.log(longestPalindrome("ac"));     // "a" 或 "c"
-
-module.exports = longestPalindrome;
+module.exports = { solution };
